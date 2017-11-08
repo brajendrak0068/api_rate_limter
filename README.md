@@ -14,10 +14,12 @@
 
 2. Create Rate limit configurations
 
-	var limitsConfig = {<br>
-	    ECOM:{total: {week:[100, 604800], month:[600, 2628000], hour: [500, 3600], min:[20, 60]}, GET: { min: [20, 604800] }, '/status':{min: [20 ,60]} },<br>
-	    ABC: {total: {week:[10, 604800], hour:[5, 3600], min: [5, 60] }, POST: { week:[ 20, 604800 ]}, '/pay':{min:[ 30, 60] } }<br>
-	};<br>
+	var limitsConfig = {
+	<br>
+	     ECOM : {total: {week:[100, 604800], month:[600, 2628000], hour: [500, 3600], min:[20, 60]}, GET: { min: [20, 604800] }, '/status':{min: [20 ,60]} },<br>
+	     ABC : {total: {week:[10, 604800], hour:[5, 3600], min: [5, 60] }, POST: { week:[ 20, 604800 ]}, '/pay':{min:[ 30, 60] } }<br>
+	
+         };<br>
 
 3. Create redis instance 
 
