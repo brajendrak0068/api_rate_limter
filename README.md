@@ -34,17 +34,17 @@
 <h1> Design Decisions </h1> 
 
 <h5>Following are the points which I have taken into considerations</h5>
-1. Response time should very fast
+<h5> 1. Response time should very fast</h5>
   I chose an in-memory database, Redis, to ensure faster I/O.
   I minimized number of trips to Redis using a single pipelined call and getting increment value with the same call. So there is only one   trip made to Redis for each call to the rate limiter.
 
-2. The amount of data that is stored should be minimum
+<h5>2. The amount of data that is stored should be minimum</h5>
   When a request is sent to rate limiter for the first time, it will create a key for it with an expiration time. Once the key expires,     there won't be any key stored for that user, unless she makes another call.
 
-3. Request data should be saved atomically and be persistent
+<h5>3. Request data should be saved atomically and be persistent</h5>
    I pipelined calls to Redis using multi/exec in order to execute only one atomic transaction per each call.
 
-4. Be able to live in a distributed environment
+<h5>4.Be able to live in a distributed environment </h5>
      i)  I avoided race conditions by using atomic increment operations which also return the result of the increment after the same call.
     ii)  Redis supports partioning.
     iii) There can be different instances of the RateLimiter object running, but they will all have access to the same traffic info via Redis. 
