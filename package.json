@@ -1,0 +1,20 @@
+{
+   "name": "api_rate_limiter",
+   "version": "1.0.0",
+   "description": "API rate limiter which works for large scale systems",
+   "main": "index.js",
+   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+   },
+   "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brajendrak0068/api_rate_limter.git"
+   },
+   "author": "Brajendra Kumar",
+   "license": "UNLICENSED",
+   "bugs": {
+    "url": "https://github.com/brajendrak0068/api_rate_limter/issues"
+   },
+   "homepage": "https://github.com/brajendrak0068/api_rate_limter#readme"
+}
+
