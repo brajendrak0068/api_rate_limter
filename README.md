@@ -1,4 +1,4 @@
-<h5>Before Starting</h5>
+<h1>Before Starting</h1>
 
 1.Please make sure you have Node.js installed on your development environment.
 
@@ -7,7 +7,7 @@
 3.Once you clone this repository, run npm install on your command line to get all the dependencies.
 
 
-<h5>Configurations and usage: </h5>
+<h1>Configurations and usage: </h1>
 
 1.require module
 	 var ratelimiter =  require('ratelimiter');
@@ -31,9 +31,9 @@
 
 
 
-<h5> Design Decisions </h5> 
+<h1> Design Decisions </h1> 
 
-<h6>Following are the points which I have taken into considerations</h6>
+<h1>Following are the points which I have taken into considerations</h1>
 1. Response time should very fast
   I chose an in-memory database, Redis, to ensure faster I/O.
   I minimized number of trips to Redis using a single pipelined call and getting increment value with the same call. So there is only one   trip made to Redis for each call to the rate limiter.
@@ -48,6 +48,3 @@
      i)  I avoided race conditions by using atomic increment operations which also return the result of the increment after the same call.
     ii)  Redis supports partioning.
     iii) There can be different instances of the RateLimiter object running, but they will all have access to the same traffic info via Redis. 
-
-5.Following the numbers and types of are covered    
-
