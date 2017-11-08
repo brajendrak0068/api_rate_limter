@@ -1,3 +1,34 @@
+Before Starting
+
+1.Please make sure you have Node.js installed on your development environment.
+2.Please make sure you have a Redis server installed on your development environment or make sure you initialize the Redis client with appropriate host and port number later on when you run the application.
+3.Once you clone this repository, run npm install on your command line to get all the dependencies.
+
+
+Configurations and usage:
+
+1.require module
+	 var ratelimiter =  require('ratelimiter');
+
+2. Create Rate limit configurations
+
+	var limitsConfig = {
+	    ECOM:{total: {week:[100, 604800], month:[600, 2628000], hour: [500, 3600], min:[20, 60]}, GET: { min: [20, 604800] }, '/status':{min: [20 ,60]} },
+	    ABC: {total: {week:[10, 604800], hour:[5, 3600], min: [5, 60] }, POST: { week:[ 20, 604800 ]}, '/pay':{min:[ 30, 60] } }
+	};
+
+3. Create redis instance 
+
+	var REDIS_PORT = 6379;
+	var REDIS_HOST = "127.0.0.1";
+	var redisClient = redis.createClient(REDIS_PORT, REDIS_HOST);
+
+4. Finally pass the rate limits config and redisClient to rate limit middleware
+
+       app.use(ratelimiter(limitsConfig, redisClient));
+
+
+
 Design Decisions
 
 Following are the points which I have taken into considerations
@@ -17,75 +48,4 @@ Following are the points which I have taken into considerations
     iii) There can be different instances of the RateLimiter object running, but they will all have access to the same traffic info via Redis. 
 
 5.Following the numbers and types of are covered    
-  Config for individual client
-	I:q: <CLIENT-ID>
-	limit::Question:q!
-		SEC -> int (Optional)
-		MIN -> int (Optional)
-		HOUR -> int (Optional)
-		WEEK -> int (Optional)
-		MONTH  -> int (Optional)
-	specialization:
-	    type: METHOD
-			- <METHOD 1> : 
-				limit:
-					SEC -> int (Optional)
-					MIN -> int (Optional)
-					HOUR -> int (Optional)
-					WEEK -> int (Optional)
-					MONTH  -> int (Optional)
-			- <METHOD 2> :
-				limit:
-					SEC -> int (Optional)
-					MIN -> int (Optional)
-					HOUR -> int (Optional)
-					WEEK -> int (Optional)
-					MONTH  -> int (Optional)
-	    type: API
-			- <API 1>:
-				limit:
-					SEC -> int (Optional)
-					MIN -> int (Optional)
-					HOUR -> int (Optional)
-					WEEK -> int (Optional)
-					MONTH  -> int (Optional)
-			- <API 2>:
-				limit:
-					SEC -> int (Optional)
-					MIN -> int (Optional)
-					HOUR -> int (Optional)
-					WEEK -> int (Optional)
-					MONTH  -> int (Optional)
 
-
-Exmaple:
-client: ABC_ECOM
-	limit:
-		HOUR -> 100
-		WEEK -> 900
-		MONTH  -> 10000
-	specialization:
-	    type: METHOD
-			- GET : 
-				limit:
-					SEC -> 10
-					MIN -> 50
-					WEEK -> 700
-			- POST :
-				limit:
-					SEC -> 20
-					HOUR -> 40
-					WEEK -> 900
-					MONTH -> 1000
-	    type: API
-			- /status :
-				limit:
-					SEC -> 20
-					HOUR -> 40
-					WEEK -> 900
-					MONTH -> 1000
-			- /pay :
-				limit:
-					SEC -> 10
-					MIN -> 50
-					WEEK -> 700
