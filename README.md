@@ -33,7 +33,7 @@
 
 <h1> Design Decisions </h1> 
 
-<h1>Following are the points which I have taken into considerations</h1>
+<h5>Following are the points which I have taken into considerations</h5>
 1. Response time should very fast
   I chose an in-memory database, Redis, to ensure faster I/O.
   I minimized number of trips to Redis using a single pipelined call and getting increment value with the same call. So there is only one   trip made to Redis for each call to the rate limiter.
