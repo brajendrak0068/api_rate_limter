@@ -45,6 +45,6 @@
    I pipelined calls to Redis using multi/exec in order to execute only one atomic transaction per each call.
 
 <h5>4.Be able to live in a distributed environment </h5>
-     i)  I avoided race conditions by using atomic increment operations which also return the result of the increment after the same call.
-    ii)  Redis supports partioning.
-    iii) There can be different instances of the RateLimiter object running, but they will all have access to the same traffic info via Redis. 
+     i)  I avoided race conditions by using atomic increment operations which also return the result of the increment after the same call.<br>
+    ii)  Redis supports partioning.<br>
+    iii) There can be different instances of the RateLimiter object running, but they will all have access to the same traffic info via Redis. <br>
